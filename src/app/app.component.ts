@@ -1,4 +1,10 @@
-import { Component, Renderer2, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Renderer2,
+  ViewChild,
+  OnInit,
+  AfterViewInit,
+} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
@@ -7,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit {
   title = 'j81';
   public controlMenuIcon: boolean = false;
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
@@ -19,7 +25,7 @@ export class AppComponent implements AfterViewInit{
   ) {}
 
   ngAfterViewInit() {
-
+    setTimeout(() => {
       this.observer.observe(['(max-width:800px)']).subscribe((res) => {
         if (res.matches) {
           this.sidenav.mode = 'over';
@@ -29,7 +35,7 @@ export class AppComponent implements AfterViewInit{
           this.sidenav.open();
         }
       });
-
+    },10);
   }
 
   animate(): void {
@@ -43,7 +49,7 @@ export class AppComponent implements AfterViewInit{
     }
   }
 
-  gotToFornecedoresPage(){
-    this.router.navigate(['fornecedores'])
+  gotToFornecedoresPage() {
+    this.router.navigate(['fornecedores']);
   }
 }
