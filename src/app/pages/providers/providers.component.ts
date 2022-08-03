@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -40,13 +41,36 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ProvidersComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+
+  cnpj: FormControl = new FormControl('');
+  nomeFantasia: FormControl = new FormControl('');
+  ativo: FormControl = new FormControl('');
+  estado: FormControl = new FormControl('');
+  cidade: FormControl = new FormControl('');
+  bairro: FormControl = new FormControl('');
+  rua: FormControl = new FormControl('');
+  representante: FormControl = new FormControl('');
+  tiposFornecedores: FormControl = new FormControl('');
+
+
+  formulario : FormGroup = new FormGroup({
+    cnpj : new FormControl(''),
+  });
+
+  displayedColumns: string[] = ['id', 'nomeFantasia', 'cnpj', 'ativo','estado','cidade','bairro','rua','numero','complemento','tipo','ativo'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  floatLabelControl = new FormControl('auto' as any);
+
   @ViewChild(MatPaginator) paginator !: MatPaginator;
 
-  constructor() { }
+  constructor(private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.formulario = this.formBuilder.group({
+      nomeFantasia: [''],
+      cnpj: [''],
+    })
   }
 
   ngAfterViewInit() {

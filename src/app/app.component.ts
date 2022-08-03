@@ -52,4 +52,8 @@ export class AppComponent implements AfterViewInit {
   gotToFornecedoresPage() {
     this.router.navigate(['fornecedores']);
   }
+
+  goToHomePage() {
+    this.router.navigate(['home']);
+  }
 }
