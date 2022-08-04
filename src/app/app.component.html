@@ -1,4 +1,6 @@
-<mat-toolbar color="primary">
+
+
+<mat-toolbar *ngIf="mostrarSideNavESideBar()" color="primary" [ngStyle]="{'display': display}">
   <a class="menu--toggle">
     <img
       alt=""
@@ -6,14 +8,14 @@
       width="30"
       height="30"
       id="img-menu"
-      (click)="animate(); sidenav.toggle()"
+      (click)="animacaoRotacionarSetaAbrirMenu(); sidenav.toggle()"
     />
   </a>
 
   <span style="padding-left: 43%">J81 CONSTRUÇÕES</span>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav mode="over" #sidenav="matSidenav">
+  <mat-sidenav mode="over" #sidenav="matSidenav" [ngStyle]="{'display': display}">
     <button mat-button class="menu-button" (click)="goToHomePage()">
       <mat-icon>home</mat-icon>
       <span>Home</span>
@@ -30,3 +32,4 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+

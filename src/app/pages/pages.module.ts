@@ -21,7 +21,6 @@ const pages = [HomeComponent, ProvidersComponent];
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
-    MatGridListModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,

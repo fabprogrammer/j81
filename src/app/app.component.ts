@@ -1,3 +1,4 @@
+import { AuthService } from './login/auth.service';
 import {
   Component,
   Renderer2,
@@ -15,30 +16,27 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements AfterViewInit {
   title = 'j81';
+  //controla a abertura do sideNav
   public controlMenuIcon: boolean = false;
+  public display = '';
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
+
+  mostrarMenu: boolean = true;
 
   constructor(
     private renderer: Renderer2,
     private observer: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
+  OnInit() {}
+
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.observer.observe(['(max-width:800px)']).subscribe((res) => {
-        if (res.matches) {
-          this.sidenav.mode = 'over';
-          this.sidenav.close();
-        } else {
-          this.sidenav.mode = 'side';
-          this.sidenav.open();
-        }
-      });
-    },10);
+    this.abrirMenuDeAcordoTamanhoTela();
   }
 
-  animate(): void {
+  animacaoRotacionarSetaAbrirMenu(): void {
     const image_menu = document.getElementById('img-menu');
     if (this.controlMenuIcon === false) {
       this.renderer.setStyle(image_menu, 'transform', `rotate(180deg)`);
@@ -49,11 +47,36 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
+  abrirMenuDeAcordoTamanhoTela() {
+    setTimeout(() => {
+      this.observer.observe(['(max-width:800px)']).subscribe((res) => {
+        if (res.matches) {
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else {
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+      });
+    }, 100);
+  }
+
   gotToFornecedoresPage() {
     this.router.navigate(['fornecedores']);
   }
 
   goToHomePage() {
     this.router.navigate(['home']);
+  }
+
+  mostrarSideNavESideBar(): boolean {
+    if (AuthService.mostrarMenu === true) {
+      //this.abrirMenuDeAcordoTamanhoTela();
+      this.display = ''
+      return true;
+    } else {
+      this.display = 'none';
+      return true;
+    }
   }
 }

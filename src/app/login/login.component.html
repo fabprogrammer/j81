@@ -1,1 +1,36 @@
-<p>login works!</p>
+<form
+  class="example-container"
+  [formGroup]="formulario"
+  class="formLogin"
+
+  (submit)="fazerLogin()"
+>
+  <div fxLayout="row" fxLayoutAlign="center center" style="text-align: center">
+    <img
+      alt=""
+      src="../../assets/icons/lock.png"
+      width="15%"
+      height="15%"
+      id="img-menu"
+      style="padding-left: 4%"
+    />
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" style="text-align: center; font-size: 180%;">
+    <mat-form-field style="padding: 0.5%; width: 30%; text-align: center;">
+      <mat-label>Usuário</mat-label>
+      <input matInput type="text" [formControl]="nomeUsuario" />
+      <mat-error *ngIf="nomeUsuario.invalid">Campo Obrigatório!</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" style="text-align: center; font-size: 180%;">
+    <mat-form-field style="padding: 0.5%; width: 30%; text-align: center;">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" [formControl]="senha" />
+      <mat-error *ngIf="senha.invalid">Campo Obrigatório!</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" style="text-align: center;">
+    <button mat-raised-button color="primary" style="width: 15%; font-size: 120%;" type="submit">Entrar</button>
+  </div>
+</form>

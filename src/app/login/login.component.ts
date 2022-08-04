@@ -1,24 +1,36 @@
-import { Usuario } from './../shared/models/usuario';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth.service';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
+import { Usuario } from './../shared/models/usuario';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
 
-  private usuario: Usuario = {nome:'fabio', senha: 'fabio', permissao: 'adm'};
+  nomeUsuario: FormControl = new FormControl('',[Validators.required]);
+  senha: FormControl = new FormControl('',[Validators.required]);
 
-  constructor(private authService: AuthService) { }
+  formulario !: FormGroup;
+
+  constructor(private authService: AuthService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.formulario = this.formBuilder.group({
+      nomeUsuario: this.nomeUsuario,
+      senha: this.senha
+    })
   }
 
-  public fazerLogin(){
-    this.authService.fazerLogin(this.usuario)
+  public fazerLogin() {
+    let usuario: Usuario = {
+      nome: this.formulario.get('nomeUsuario')?.value,
+      senha: this.formulario.get('senha')?.value,
+      permissao:''
+    }
+    this.authService.fazerLogin(usuario);
   }
-
 }

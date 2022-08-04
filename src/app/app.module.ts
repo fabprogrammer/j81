@@ -13,11 +13,11 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -30,6 +30,7 @@ import { AuthService } from './login/auth.service';
     MatSidenavModule,
     MatDividerModule,
     FormsModule,
+    LoginModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
