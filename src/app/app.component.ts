@@ -1,25 +1,27 @@
-import { AuthService } from './login/auth.service';
-import {
-  Component,
-  Renderer2,
-  ViewChild,
-  OnInit,
-  AfterViewInit,
-} from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AfterViewInit, Component, Renderer2, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+
+import { AuthService } from './login/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements AfterViewInit {
-  title = 'j81';
-  //controla a abertura do sideNav
-  public controlMenuIcon: boolean = false;
-  public display = '';
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
+
+  //variável de controle do botão ">" para abertura abertura do sideNav(menu vertical)
+  public controlMenuIcon: boolean = false;
+
+  //variáveis de controle de comportamentos de css da tela
+  public cssDisplay = '';
+  public cssContentContainer: string = 'content mat-elevation-z4';
+
+  //váriavel de controle para quando o login é autenticado
+  dinamicaPosLogin: boolean = true;
 
   mostrarMenu: boolean = true;
 
@@ -70,13 +72,21 @@ export class AppComponent implements AfterViewInit {
   }
 
   mostrarSideNavESideBar(): boolean {
-    if (AuthService.mostrarMenu === true) {
-      //this.abrirMenuDeAcordoTamanhoTela();
-      this.display = ''
-      return true;
-    } else {
-      this.display = 'none';
-      return true;
+    if (this.dinamicaPosLogin === true) {
+      if (AuthService.mostrarMenu === true) {
+        this.cssDisplay = '';
+        this.cssContentContainer = 'content mat-elevation-z4';
+        this.sidenav.close();
+        this.controlMenuIcon = false;
+        this.animacaoRotacionarSetaAbrirMenu();
+        this.dinamicaPosLogin = false;
+        return true;
+      } else {
+        this.cssDisplay = 'none';
+        this.cssContentContainer = '';
+        return true;
+      }
     }
+    return true;
   }
 }

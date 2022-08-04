@@ -7,8 +7,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-
-
 @NgModule({
   declarations: [LoginComponent],
   imports: [
@@ -17,6 +15,6 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-  ]
+  ],
 })
-export class LoginModule { }
+export class LoginModule {}

@@ -1,6 +1,8 @@
-
-
-<mat-toolbar *ngIf="mostrarSideNavESideBar()" color="primary" [ngStyle]="{'display': display}">
+<mat-toolbar
+  *ngIf="mostrarSideNavESideBar()"
+  color="primary"
+  [ngStyle]="{ display: cssDisplay }"
+>
   <a class="menu--toggle">
     <img
       alt=""
@@ -13,23 +15,27 @@
   </a>
 
   <span style="padding-left: 43%">J81 CONSTRUÇÕES</span>
+  <span style="padding-left: 42%; font-size: 70%;">Versão: 1.0.0</span>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav mode="over" #sidenav="matSidenav" [ngStyle]="{'display': display}">
+  <mat-sidenav
+    mode="over"
+    #sidenav="matSidenav"
+    [ngStyle]="{ display: cssDisplay }"
+  >
     <button mat-button class="menu-button" (click)="goToHomePage()">
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
-    <mat-divider style="background-color:#ffffffcf"></mat-divider>
+    <mat-divider style="background-color: #ffffffcf"></mat-divider>
     <button mat-button class="menu-button" (click)="gotToFornecedoresPage()">
       <mat-icon></mat-icon>
       <span>Fornecedores</span>
     </button>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="content mat-elevation-z4">
+  <mat-sidenav-content style="background-color: white;">
+    <div [ngClass]="cssContentContainer">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
