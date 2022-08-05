@@ -4,17 +4,21 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 describe('AuthService', () => {
   let service: AuthService;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(
-        [{path: 'home', component: HomeComponent}]
-      )],
+      imports: [RouterTestingModule],
+      providers: [{provide: Router, useValue: {
+        navigate: () => null
+      }}]
     });
     service = TestBed.inject(AuthService);
+    router = TestBed.inject(Router);
   });
 
   it('should be created', () => {
@@ -39,5 +43,16 @@ describe('AuthService', () => {
       permissao: '0',
     } as Usuario;
     expect(service['usuarioAutenticado']).toEqual(false);
-  })
+  });
+
+  it('should navigate', () => {
+    let mockUser = {
+      nome: 'fabio',
+      senha: 'fabio',
+      permissao: '1',
+    } as Usuario;
+    const navigateSpy = jest.spyOn(router, 'navigate');
+    service.fazerLogin(mockUser);
+    expect(navigateSpy).toHaveBeenCalled();
+});
 });
