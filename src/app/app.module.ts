@@ -14,6 +14,7 @@ import { PagesModule } from './pages/pages.module';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
 import { LoginModule } from './login/login.module';
+import { GuardaRotas } from 'src/app/guards/guarda-rotas';
 
 @NgModule({
   declarations: [

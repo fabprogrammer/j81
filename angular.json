@@ -83,6 +83,9 @@
           "options": {
             "browserTarget": "j81-spa:build"
           }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run"
         }
       }
     }

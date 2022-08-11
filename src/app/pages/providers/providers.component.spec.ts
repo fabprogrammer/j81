@@ -29,8 +29,7 @@ describe('ProvidersComponent', () => {
         MatInputModule,
         MatButtonModule,
         BrowserAnimationsModule,
-        MatTableModule
-
+        MatTableModule,
       ],
       providers: [FormBuilder],
     }).compileComponents();
@@ -43,4 +42,13 @@ describe('ProvidersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('teste de chamada de método ngOnInit()', () => {
+    expect(component.ngOnInit()).toBeUndefined();
+  });
+
+  it('teste de chamada de método ngAfterViewInit()', () => {
+    expect(component.ngAfterViewInit()).toBeUndefined();
+  });
+
 });

@@ -11,21 +11,35 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let authServiceStub = {
+    fazerLogin: () => null
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      imports: [RouterTestingModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, BrowserAnimationsModule ],
-      providers : [FormBuilder]
-    })
-    .compileComponents();
+      declarations: [LoginComponent],
+      imports: [
+        RouterTestingModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+      ],
+      providers: [FormBuilder, { provide: AuthService, useValue: authServiceStub }],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Criando Instância do componente LoginComponent', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Chamando método de autenticação de usuário "fazerLogin()"', () => {
+    component.formulario.get('nomeUsuario')?.setValue('fabio');
+    component.formulario.get('senha')?.setValue('fabio');
+    expect(component.fazerLogin()).toBeUndefined();
   });
 });
