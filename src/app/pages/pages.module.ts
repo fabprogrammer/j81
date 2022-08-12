@@ -1,16 +1,14 @@
+
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
 
+import { AppMaterialModule } from '../shared/app-material.module';
 import { HomeComponent } from './home/home.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { ProvidersResolver } from './providers/guardas/providers.resolver';
 import { ProvidersComponent } from './providers/providers.component';
+import { FornecedoresService } from './providers/servicos/fornecedores.service';
 
 const pages = [HomeComponent, ProvidersComponent];
 
@@ -18,14 +16,11 @@ const pages = [HomeComponent, ProvidersComponent];
   declarations: [ProvidersComponent, HomeComponent],
   imports: [
     PagesRoutingModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatCardModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
+    CommonModule,
+    AppMaterialModule
   ],
   exports: [...pages],
+  providers: [ProvidersResolver, FornecedoresService]
 })
 export class PagesModule {}

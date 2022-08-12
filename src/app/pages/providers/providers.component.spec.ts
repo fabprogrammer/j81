@@ -1,17 +1,16 @@
-import { MatTableModule } from '@angular/material/table';
-import { AppModule } from './../../app.module';
-import { Router } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-
-import { ProvidersComponent } from './providers.component';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { RouterTestingModule } from '@angular/router/testing';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { ProvidersComponent } from './providers.component';
 
 describe('ProvidersComponent', () => {
   let component: ProvidersComponent;
@@ -30,6 +29,7 @@ describe('ProvidersComponent', () => {
         MatButtonModule,
         BrowserAnimationsModule,
         MatTableModule,
+        MatProgressSpinnerModule
       ],
       providers: [FormBuilder],
     }).compileComponents();

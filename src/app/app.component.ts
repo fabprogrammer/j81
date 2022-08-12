@@ -32,8 +32,6 @@ export class AppComponent implements AfterViewInit {
     private authService: AuthService
   ) {}
 
-  OnInit() {}
-
   ngAfterViewInit() {
     this.abrirMenuDeAcordoTamanhoTela();
   }

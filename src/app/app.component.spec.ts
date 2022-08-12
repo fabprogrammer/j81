@@ -12,6 +12,7 @@ import { AuthService } from './login/auth.service';
 
 
 describe('AppComponent', () => {
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -33,9 +34,10 @@ describe('AppComponent', () => {
   });
 
 
-  it('should create the app', () => {
+  it('Criação de AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
+
 });
