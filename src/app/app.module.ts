@@ -1,4 +1,5 @@
-import { AppMaterialModule } from './shared/app-material.module';
+import { SharedModule } from './shared/shared.module';
+import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -25,7 +26,7 @@ import { PagesModule } from './pages/pages.module';
     FormsModule,
     LoginModule,
     HttpClientModule,
-    AppMaterialModule
+    SharedModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

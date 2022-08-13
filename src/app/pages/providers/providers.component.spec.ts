@@ -1,7 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -11,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ProvidersComponent } from './providers.component';
+import { FornecedoresService } from './servicos/fornecedores.service';
 
 describe('ProvidersComponent', () => {
   let component: ProvidersComponent;
@@ -29,9 +32,11 @@ describe('ProvidersComponent', () => {
         MatButtonModule,
         BrowserAnimationsModule,
         MatTableModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        HttpClientTestingModule
       ],
-      providers: [FormBuilder],
+      providers: [FormBuilder, FornecedoresService, MatDialog],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProvidersComponent);

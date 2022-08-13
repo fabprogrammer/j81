@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { catchError, Observable, of } from 'rxjs';
 
+import { ErrorDialogComponent } from './../../shared/component/error-dialog/error-dialog.component';
 import { FornecedoresTabela } from './../../shared/models/fornecedores-tabela';
+import { FornecedoresService } from './servicos/fornecedores.service';
 
 export interface PeriodicElement {
   name: string;
@@ -42,6 +46,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./providers.component.scss'],
 })
 export class ProvidersComponent implements OnInit {
+  //Filtros e seus FormControls
   cnpj: FormControl = new FormControl('');
   nomeFantasia: FormControl = new FormControl('');
   ativo: FormControl = new FormControl('');
@@ -51,11 +56,14 @@ export class ProvidersComponent implements OnInit {
   rua: FormControl = new FormControl('');
   representante: FormControl = new FormControl('');
   tiposFornecedores: FormControl = new FormControl('');
-  loading: boolean = true;
+  //Spinner
+  loading: boolean = false;
 
   formulario: FormGroup = new FormGroup({
     cnpj: new FormControl(''),
   });
+
+  fornecedores$: Observable<Array<FornecedoresTabela>> = [] as any;
 
   displayedColumns: string[] = [
     'id',
@@ -70,14 +78,17 @@ export class ProvidersComponent implements OnInit {
     'complemento',
     'tipo',
   ];
-  dataSource: any = [];
-  floatLabelControl = new FormControl('auto' as any);
 
+  dataSource: any = [];
+
+  //Controlador da paginação
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fornecedoresService: FornecedoresService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -95,5 +106,26 @@ export class ProvidersComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  public filtrar() {
+    this.loading = true;
+    this.fornecedoresService.getAllFornecedores().pipe(
+      catchError((error) => {
+        console.log('Entrou no catchError');
+        this.onError('Erro ao carregar fornecedores.');
+        return of([]);
+      })
+    );
+  }
+
+  public limpar() {
+    this.loading = false;
+  }
+
+  onError(errorMessage: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: errorMessage,
+    });
   }
 }

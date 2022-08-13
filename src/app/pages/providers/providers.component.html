@@ -43,18 +43,18 @@
       fxLayoutAlign="center center"
       style="text-align: center"
     >
-      <button mat-raised-button color="primary">Filtrar</button>
+      <button mat-raised-button color="primary" (click)="filtrar()">Filtrar</button>
       <button mat-raised-button color="primary" style="margin-left: 0.5%">
         Incluir
       </button>
-      <button mat-raised-button color="basic" style="margin-left: 0.5%">
+      <button mat-raised-button color="basic" style="margin-left: 0.5%" (click)="limpar()">
         Limpar
       </button>
     </div>
   </form>
 </mat-card>
 
-<div class="">
+<div>
   <table mat-table [dataSource]="dataSource" *ngIf="loading === false">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Id</th>

@@ -1,9 +1,10 @@
+import { SharedModule } from './../shared/shared.module';
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AppMaterialModule } from '../shared/app-material.module';
+import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { HomeComponent } from './home/home.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ProvidersResolver } from './providers/guardas/providers.resolver';
@@ -18,7 +19,7 @@ const pages = [HomeComponent, ProvidersComponent];
     PagesRoutingModule,
     ReactiveFormsModule,
     CommonModule,
-    AppMaterialModule
+    SharedModule
   ],
   exports: [...pages],
   providers: [ProvidersResolver, FornecedoresService]
