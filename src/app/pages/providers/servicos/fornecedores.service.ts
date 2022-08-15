@@ -7,10 +7,15 @@ import { FornecedoresTabela } from 'src/app/shared/models/fornecedores-tabela';
   providedIn: 'root',
 })
 export class FornecedoresService {
+
+  private readonly API = '/s1/fornecedor';
+
   constructor(private httpClient: HttpClient) {}
 
   getAllFornecedores(): Observable<Array<FornecedoresTabela>> {
-    let fornecedores: Array<FornecedoresTabela> = [
+
+    return this.httpClient.get<FornecedoresTabela[]>(this.API);
+    /*let fornecedores: Array<FornecedoresTabela> = [
       {
         id: 0,
         ativo: true,
@@ -364,7 +369,7 @@ export class FornecedoresService {
       },
     ];
 
-    return of(fornecedores);
+    return of(fornecedores);*/
   }
 
 }
